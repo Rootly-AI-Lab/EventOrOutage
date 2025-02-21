@@ -44,8 +44,8 @@ class SyntheticData:
             for geo in website_data[website]['geos']:
                 website_data[website]['growth_rates'][geo] = random.uniform(0.02, 0.20)
 
-        # Set end date to November 1, 2025
-        end_date = datetime(2025, 11, 1)
+        # Set end date to November 1, 2024
+        end_date = datetime(2024, 11, 1)
 
         # Pick a random month in the past 12 months
         # end_date = datetime.now() - timedelta(days=random.randint(0, 365))
@@ -112,8 +112,10 @@ class SyntheticData:
                             # LLMS can be inconsistent with date format
                             if isinstance(event_date, str):
                                 event_date = datetime.strptime(event_date, '%Y-%m-%d').date()
-                            else:
+                            elif isinstance(event_date, datetime):
                                 event_date = event_date.date()
+                            elif isinstance(event_date, date):
+                                pass
                             if event['geo'] == geo and event_date == date.date():
                                 daily_pv = int(daily_pv * random.uniform(0.3, 0.7))
                                 anomaly = event['event_name']

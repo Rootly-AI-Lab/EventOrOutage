@@ -78,7 +78,7 @@ class MarkdownGenerator:
                                 events.append(f"🔥 {event['event']} (Probability: {event['probability']})")
                             markdown_content += f" - " + ", ".join(events)
                         else:
-                            markdown_content += f"{index + 1}. {date} - "
+                            markdown_content += f"{index + 1}. {date} "
                         markdown_content += "\n\n"
                     markdown_content += "</details>\n\n"
                 else:
