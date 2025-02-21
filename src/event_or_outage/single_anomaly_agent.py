@@ -14,14 +14,13 @@ class SingleAnomalyAgent:
     """
     Agent for handling single anomaly detection and analysis.
     """
-    LLM_LOGLEVEL = LogLevel.INFO
+    LLM_LOGLEVEL = LogLevel.OFF
     
     
     def __init__(self):
         super().__init__()
         self.logger = Logger('default')
         Utils.load_dotenv()
-        Utils.load_templates()['single_event_template']
 
         
     def troubleshoot(self, duration: str, location: str, industry: str, model: str):

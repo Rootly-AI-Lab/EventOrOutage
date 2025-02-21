@@ -3,28 +3,31 @@ single_event:
   template: |
     My website traffic dropped {duration} {location}
     Can you tell me 5 most likely holidays or events that might cause that with probabilities? 
-    You can use fetch_holidays and fetch_calendarific avaialable in tools to get event and holiday information in parallel to get events newer than your database. Use your own logic to determine the probability of each holiday/event.
-    You need to always pass in a country, year, month and day to the tools.
-    If you get a 402 error from holidayapi.com, then do not call it again. Let the user know via a warning at the end that for recent events, holidayapi.com needs a premium account.
+    Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
+    Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
+    Use your own logic to determine the probability of each holiday/event.
+    If you get a 402 error from holidayapi.com, then don't call it again. Store the error message and list it in the summary.
+    You need to always pass in a country, year, month and day to the tools. The country param should be in two character country code format
     Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
-    Only list events that have a probability greater than 0.5
+    Only list a reason if you have a probability greater than 0.5
+    If you don't, just say "No events or holidays found"
     Output the result in a human readable format tailored for executives. Specify the date, the reason you have deduce and how sure you are.
   
 bulk_analysis:
   template: |
-    Analyze the following traffic anomalies:
+    Analyze traffic anomalies on the following websites, locations and dates:
 
     {anomalies_list}
 
-    For each anomaly above:
+    For each:
     - Identify potential causes for the traffic changes, including holidays and events
-    - You can use fetch_holidays and fetch_calendarific avaialable in tools to get event and holiday information in parallel to get events newer than your database. 
-    - Use your own logic to determine the probability of each holiday/event. attempt to deduplicate events so you aren't overloading the external tools/apis such as holidayapi.com and calendarific.com. When you are sure about holiday/event, based on your own logic, do not make calls to external tools.
-    - If you get a 402 error from holidayapi.com, then do not call it again. Let the user know via a warning at the end in the summary that for recent events, holidayapi.com needs a premium account.
-    - You need to always pass in a country, year, month and day to the tools.
+    - Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
+    - Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
+    - Use your own logic to determine the probability of each holiday/event.
+    - If you get a 402 error from holidayapi.com, then don't call it again. Store the error message and list it in the summary.
+    - You need to always pass in a country, year, month and day to the tools. The country param should be in two character country code format
     - Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
-    - Determine probability of each potential cause and list 5 most likely causes
-    - Only list events that have a probability greater than 0.5
+    - Determine probability of each potential cause and list 5 most likely causes (ie probability > 50%)
     - if there are no events that have a probability greater than 0.5, then just drop the event
 
     Please provide a detailed analysis for each anomaly, as well as any overall trends or insights across multiple anomalies.

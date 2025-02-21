@@ -12,7 +12,7 @@ class MarkdownGenerator:
             traffic_data: pd.DataFrame, 
             anomaly_candidates: dict, 
             analysis_results: dict, 
-            output_filepath: str):
+            output_dir: str):
         """Generate charts of the analysis results.
         
         Args:
@@ -25,9 +25,7 @@ class MarkdownGenerator:
 
         # Get unique list of websites from the dataframe
         websites = traffic_data['website'].unique().tolist()
-        # FIXME: Hack. i know synthetic data so I am hardcoding the dates
-        end_date = datetime.now()
-        start_date = end_date - timedelta(days=60)
+        
         
         # FIXME: Duplicate code between this and generate_traffic_markdown
         for website in websites:
@@ -39,6 +37,7 @@ class MarkdownGenerator:
                 markdown_content += "## Daily View\n\n"
                 geo_df = website_df[website_df['geo'] == geo]
                 iter_date = pd.to_datetime(geo_df['date'])
+                end_date = iter_date.max()
                 month1_data = geo_df[iter_date < (end_date - timedelta(days=30))]
                 month2_data = geo_df[iter_date >= (end_date - timedelta(days=30))]
                 
@@ -48,7 +47,7 @@ class MarkdownGenerator:
                 markdown_content += "```mermaid\n"
                 markdown_content += "xychart-beta\n"
                 markdown_content += "title Traffic Analysis\n"
-                markdown_content += f"x-axis [" + ",".join([f'"{d}"' for d in month1_data['date']]) + "]\n"
+                markdown_content += f"x-axis [" + ",".join([f'"{d}"' for d in month2_data['date']]) + "]\n"
                 markdown_content += f"y-axis \"Pageviews\" 0--> {max_pv}\n"
                 
                 # Add data lines
@@ -59,14 +58,13 @@ class MarkdownGenerator:
                 # Add anomaly statistics section
                 markdown_content += "## Anomaly Statistics\n\n"
         
-                
                 total_anomalies = 0
                 triaged_anomalies = 0
                 
                 # Get anomaly candidates for current website and geo
                 geo_anomaly_candidates = anomaly_candidates.get(website, {}).get(geo, {})
                 if geo_anomaly_candidates:
-                    markdown_content += "<details>\n"
+                    markdown_content += "<details>\n\n"
                     markdown_content += "<summary>Detected Anomalies</summary>\n"
                     total_anomalies = len(geo_anomaly_candidates)
                     for index, date in enumerate(geo_anomaly_candidates):
@@ -89,19 +87,27 @@ class MarkdownGenerator:
                 
                 
             
-                markdown_content += f"- Total Anomalies Detected: {total_anomalies}\n\n"
-                markdown_content += f"- Anomalies Triaged: {triaged_anomalies}\n\n"
-                markdown_content += f"- Triage Coverage: {(triaged_anomalies/total_anomalies*100):.1f}% \n\n\n" if total_anomalies > 0 else "- No anomalies detected\n\n"
+                markdown_content += f"> Total Anomalies Detected: {total_anomalies}\n\n"
+                markdown_content += f"> Anomalies Triaged: {triaged_anomalies}\n\n"
+                markdown_content += f"> Triage Coverage: {(triaged_anomalies/total_anomalies*100):.1f}% \n\n\n" if total_anomalies > 0 else "- No anomalies detected\n\n"
 
         # Save markdown file
+        if not os.path.exists(output_dir):
+            raise FileNotFoundError(f"Base path {output_dir} does not exist")
+        os.makedirs(os.path.join(output_dir, "artifacts"), exist_ok=True)
+
+        os.makedirs("artifacts", exist_ok=True)
+        output_filepath = os.path.join(output_dir, "artifacts", f"anomaly_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md")
         FileUtils.save_markdown(output_filepath, markdown_content)
 
     def generate_traffic_csv(traffic_data: pd.DataFrame, output_dir: str):
         df = pd.DataFrame(traffic_data, columns=['website', 'industry', 'geo', 'date', 'pageviews', '5xx', '4xx', '3xx', 'mom_growth', 'anomaly'])
-        base_path = os.path.dirname(output_dir)
-        df.to_csv(os.path.join(base_path, 'website_metrics_labelled.csv'), index=False)
+        if not os.path.exists(output_dir):
+            raise FileNotFoundError(f"Base path {output_dir} does not exist")
+        os.makedirs(os.path.join(output_dir, "artifacts"), exist_ok=True)
+        df.to_csv(os.path.join(output_dir, 'artifacts', 'website_metrics_labelled.csv'), index=False)
         df_unlabelled = df.drop('anomaly', axis=1)
-        df_unlabelled.to_csv(os.path.join(base_path, 'website_metrics_unlabelled.csv'), index=False)
+        df_unlabelled.to_csv(os.path.join(output_dir, 'artifacts', 'website_metrics_unlabelled.csv'), index=False)
 
     # FIXME: passing a date here is pretty ugly
     def generate_traffic_markdown(
@@ -137,7 +143,6 @@ class MarkdownGenerator:
                 geo_df = website_df[website_df['geo'] == geo]
                 month1_data = geo_df[geo_df['date'] < (end_date - timedelta(days=30))]
                 month2_data = geo_df[geo_df['date'] >= (end_date - timedelta(days=30))]
-                
                 min_pv = min(geo_df['pageviews'])
                 max_pv = max(geo_df['pageviews'])
                 
@@ -152,5 +157,8 @@ class MarkdownGenerator:
                 markdown_content += f"line [" + ",".join(map(str, month1_data['pageviews'].tolist())) + "]\n"
                 markdown_content += f"line [" + ",".join(map(str, month2_data['pageviews'].tolist())) + "]\n"
                 markdown_content += "```\n\n"
-        base_path = os.path.dirname(output_dir)
-        FileUtils.save_markdown(os.path.join(base_path, 'traffic_analysis.md'), markdown_content)
+
+        if not os.path.exists(output_dir):
+            raise FileNotFoundError(f"Base path {output_dir} does not exist")
+        os.makedirs(os.path.join(output_dir, "artifacts"), exist_ok=True)
+        FileUtils.save_markdown(os.path.join(output_dir, 'artifacts', 'traffic_analysis.md'), markdown_content)

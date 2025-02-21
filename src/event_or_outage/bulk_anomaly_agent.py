@@ -9,11 +9,8 @@ from utils import Utils
 # TODO: Inherit from CodeAgent
 class BulkAnomalyAgent:
 
-    LLM_LOGLEVEL = LogLevel.INFO
-    BULK_ANOMALY_PROPERTY_LIMIT = 1
-    BULK_ANOMALY_LIMIT = 10 # total anomalies per property
-    BULK_ANOMALY_GEO_LIMIT = 3 # total geos (to stagger anomalies across geos else a geo may consume the BULK_ANOMALY_LIMIT, fairly hackish)
-    LLM_MAX_STEPS_OVERRIDE = 6
+    LLM_LOGLEVEL = LogLevel.OFF
+    LLM_MAX_STEPS_OVERRIDE = 100
     BULK_LLM_BATCH_SIZE = 25
 
     def __init__(self):
@@ -27,26 +24,14 @@ class BulkAnomalyAgent:
         Args:
             anomaly_candidates: Dictionary containing websites, their geos, and anomalous dates
         """
-        
         property_list = []
-        anomaly_property_count = 0
         for website, geo_data in anomaly_candidates.items(): 
-            anomaly_geo_count = 0
-            if anomaly_property_count >= self.BULK_ANOMALY_PROPERTY_LIMIT:
-                    break
             for geo, dates in geo_data.items():
-                if anomaly_geo_count >= self.BULK_ANOMALY_GEO_LIMIT:
-                    break
-                anomaly_count = 0
                 for date in dates:
                     property_list.append(f"Website: {website}, Geo: {geo}, Date: {date}")
-                    anomaly_count += 1
-                    if anomaly_count >= self.BULK_ANOMALY_LIMIT:
-                        break
-            anomaly_property_count += 1
 
         model = LLMUtils.get_llm_model(model)
-        
+        self.logger.info(f"Analyzing {len(property_list)} anomalies")
         # Split property list 
         batches = [property_list[i:i + self.BULK_LLM_BATCH_SIZE] for i in range(0, len(property_list), self.BULK_LLM_BATCH_SIZE)]
         
@@ -91,6 +76,10 @@ class BulkAnomalyAgent:
             'analysis': {}
         }
         for result in all_results:
-            if result.get('analysis'):
-                combined_result['analysis'].update(result['analysis'])
+            try:
+                if result.get('analysis'):
+                    combined_result['analysis'].update(result['analysis'])
+            except Exception as e:
+                self.logger.error(f"Error updating combined result: {e}")
+                self.logger.error(f"result was: {result}")
         return combined_result

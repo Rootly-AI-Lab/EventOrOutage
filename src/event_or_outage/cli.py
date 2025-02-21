@@ -82,8 +82,10 @@ def main():
         
         anomaly_candidates = NaiveAnomalyDetecter().get_anomalies(df)
         output = BulkAnomalyAgent().troubleshoot(anomaly_candidates, args.model)
-        filename = f"anomaly_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
-        MarkdownGenerator.generate_anomaly_markdown(df, anomaly_candidates, output['analysis'], filename)
+        output_analysis = output['analysis']
+        
+        base_path = os.path.dirname(args.file)
+        MarkdownGenerator.generate_anomaly_markdown(df, anomaly_candidates, output_analysis, base_path)
         
         if output.get('summary'):
             print(colored(output['summary'], 'green'))
