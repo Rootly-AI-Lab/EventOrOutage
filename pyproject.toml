@@ -1,0 +1,33 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "event_or_outage"
+version = "0.1.0"
+authors = [
+    { name="Jeba Singh Emmanuel", email="jeba.emmanuel@rootly.com" },
+]
+description = "An AI agent that can classify events and outages"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "smolagents",
+    "python-dotenv",
+    "huggingface-hub",
+    "litellm",
+    "halo",
+    "termcolor"
+]
+[project.urls]
+"Homepage" = "https://github.com/username/your-package-name"
+"Bug Tracker" = "https://github.com/username/your-package-name/issues"
+
+[license]
+file = "LICENSE"
+text = "This project is licensed under the MIT License - see the LICENSE file for details."
