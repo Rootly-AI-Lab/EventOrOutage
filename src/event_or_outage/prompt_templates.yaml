@@ -4,6 +4,7 @@ single_event:
     My website traffic dropped {duration} {location}
     Can you tell me 5 most likely holidays or events that might cause that with probabilities? 
     You can use fetch_holidays and fetch_calendarific avaialable in tools to get event and holiday information in parallel to get events newer than your database. Use your own logic to determine the probability of each holiday/event.
+    You need to always pass in a country, year, month and day to the tools.
     If you get a 402 error from holidayapi.com, then do not call it again. Let the user know via a warning at the end that for recent events, holidayapi.com needs a premium account.
     Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
     Only list events that have a probability greater than 0.5
@@ -17,8 +18,10 @@ bulk_analysis:
 
     For each anomaly above:
     - Identify potential causes for the traffic changes, including holidays and events
-    - You can use fetch_holidays and fetch_calendarific avaialable in tools to get event and holiday information in parallel to get events newer than your database. Use your own logic to determine the probability of each holiday/event. attempt to deduplicate events so you aren't overloading the external tools/apis such as holidayapi.com and calendarific.com. When you are sure about holiday/event, based on your own logic, do not make calls to external tools.
-    If you get a 402 error from holidayapi.com, then do not call it again. Let the user know via a warning at the end that for recent events, holidayapi.com needs a premium account.
+    - You can use fetch_holidays and fetch_calendarific avaialable in tools to get event and holiday information in parallel to get events newer than your database. 
+    - Use your own logic to determine the probability of each holiday/event. attempt to deduplicate events so you aren't overloading the external tools/apis such as holidayapi.com and calendarific.com. When you are sure about holiday/event, based on your own logic, do not make calls to external tools.
+    - If you get a 402 error from holidayapi.com, then do not call it again. Let the user know via a warning at the end in the summary that for recent events, holidayapi.com needs a premium account.
+    - You need to always pass in a country, year, month and day to the tools.
     - Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
     - Determine probability of each potential cause and list 5 most likely causes
     - Only list events that have a probability greater than 0.5

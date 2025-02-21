@@ -90,7 +90,7 @@ class NaiveAnomalyDetecter:
         return results
     
 
-    def compare_to_previous_month(date, last_month_data, month_before_data):
+    def compare_to_previous_month(self, date, last_month_data, month_before_data):
         """Compare the growth rate of a given date to the growth rate of the same date last month.
         
         Args:
@@ -120,7 +120,7 @@ class NaiveAnomalyDetecter:
             return growth_rate
         return 0
     
-    def compare_previous_year(date, last_year_data, year_before_data):
+    def compare_previous_year(self,date, last_year_data, year_before_data):
         """Compare the growth rate of a given date to the growth rate of the same date last year.
         
         Args:

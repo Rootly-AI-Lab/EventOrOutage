@@ -19,7 +19,9 @@ class BulkAnomalyAgent:
     def __init__(self):
         self.anomalies = []
         self.logger = Logger('default')
-    def troubleshoot(self, anomaly_candidates):
+        Utils.load_dotenv()
+        
+    def troubleshoot(self, anomaly_candidates, model: str):
         """Analyze bulk anomalies and provide detailed analysis.
         
         Args:

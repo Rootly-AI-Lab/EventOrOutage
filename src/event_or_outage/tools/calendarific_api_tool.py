@@ -11,11 +11,11 @@ class CalendarificAPITool(Tool):
     inputs = {
         "country": {
             "type": "string",
-            "description": "the country to fetch holidays for",
+            "description": "the country to fetch holidays for"
         },
         "year": {
             "type": "integer",
-            "description": "the year to fetch holidays for",
+            "description": "the year to fetch holidays for"
         },
         "month": {
             "type": "integer",

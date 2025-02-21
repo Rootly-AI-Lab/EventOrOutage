@@ -31,7 +31,7 @@ class Utils:
         # Get templates
         return {
             'single_event_template': prompt_templates['single_event']['template'],
-            'bulk_event_template': prompt_templates['bulk_analysis']['template']
+            'bulk_analysis_template': prompt_templates['bulk_analysis']['template']
         }
 
 

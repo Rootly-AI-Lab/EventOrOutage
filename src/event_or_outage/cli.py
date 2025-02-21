@@ -80,8 +80,8 @@ def main():
         
         df = CLI.load_data_file(args.file)
         
-        anomaly_candidates = NaiveAnomalyDetecter.detect_anomalies(df)
-        output = BulkAnomalyAgent.troubleshoot(anomaly_candidates, args.model)
+        anomaly_candidates = NaiveAnomalyDetecter().get_anomalies(df)
+        output = BulkAnomalyAgent().troubleshoot(anomaly_candidates, args.model)
         filename = f"anomaly_analysis_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
         MarkdownGenerator.generate_anomaly_markdown(df, anomaly_candidates, output['analysis'], filename)
         
