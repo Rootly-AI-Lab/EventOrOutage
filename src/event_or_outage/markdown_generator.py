@@ -31,7 +31,6 @@ class MarkdownGenerator:
         for website in websites:
             markdown_content += f"## {website}\n\n"
             website_df = traffic_data[traffic_data['website'] == website]
-            
             for geo in website_df['geo'].unique():
                 markdown_content += f"### {geo}\n\n"
                 markdown_content += "## Daily View\n\n"
@@ -65,7 +64,7 @@ class MarkdownGenerator:
                 geo_anomaly_candidates = anomaly_candidates.get(website, {}).get(geo, {})
                 if geo_anomaly_candidates:
                     markdown_content += "<details>\n\n"
-                    markdown_content += "<summary>Detected Anomalies</summary>\n"
+                    markdown_content += "<summary>Detected Anomalies</summary>\n\n"
                     total_anomalies = len(geo_anomaly_candidates)
                     for index, date in enumerate(geo_anomaly_candidates):
                         is_triaged = analysis_results.get(website, {}).get(geo, {}).get(date, {})
@@ -74,8 +73,9 @@ class MarkdownGenerator:
                             triaged_anomalies += 1
                             markdown_content += f"{index + 1}. {date} "
                             events = []
+                            # events.append(f"🔥")
                             for event in is_triaged:
-                                events.append(f"🔥 {event['event']} (Probability: {event['probability']})")
+                                events.append(f"{event['event']} (Probability: {float(event['probability'])*100:.1f}%)")
                             markdown_content += f" - " + ", ".join(events)
                         else:
                             markdown_content += f"{index + 1}. {date} "
