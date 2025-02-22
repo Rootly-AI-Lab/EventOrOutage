@@ -90,7 +90,7 @@ class SyntheticData:
                 return as a list of dictionaries with the following keys: geo, date, event_name, probability
                 """
             events = agent.run(prompt)
-            # self.logger.info(events)
+
             
             for geo in website_data[website]['geos']:
                 base_pv = website_data[website]['base_pageviews']

@@ -104,7 +104,7 @@ class MarkdownGenerator:
 
     # FIXME: passing a date here is pretty ugly
     def generate_traffic_markdown(
-            traffic_data: pd.DataFrame, 
+            data: list, 
             output_dir: str):
         """Generate charts of the analysis results.
         
@@ -114,18 +114,13 @@ class MarkdownGenerator:
         Returns:
             markdown_content: Markdown content
         """
-        df = pd.DataFrame(traffic_data, columns=['website', 'industry', 'geo', 'date', 'pageviews', '5xx', '4xx', '3xx', 'mom_growth', 'anomaly'])
-        df.to_csv('website_metrics_labelled.csv', index=False)
-        df_unlabelled = df.drop('anomaly', axis=1)
-        df_unlabelled.to_csv('website_metrics_unlabelled.csv', index=False)
-
+        traffic_data = pd.DataFrame(data, columns=['website', 'industry', 'geo', 'date', 'pageviews', '5xx', '4xx', '3xx', 'mom_growth', 'anomaly'])
         # Generate Mermaid charts markdown
         markdown_content = "# Website Traffic Analysis\n\n"
 
         end_date = traffic_data['date'].max()
         start_date = end_date - timedelta(days=60)
-
-        for geo in traffic_data['geos']:
+        for geo in traffic_data['geo'].unique():
             markdown_content += f"### Country: {geo}\n\n"
             markdown_content += "## Daily View\n\n"
             geo_df = traffic_data[traffic_data['geo'] == geo]

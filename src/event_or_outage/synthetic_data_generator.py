@@ -26,7 +26,7 @@ def main():
     data = SyntheticData().generate(datetime(2024, 11, 1))
     MarkdownGenerator.generate_traffic_csv(data, output_dir)
     MarkdownGenerator.generate_traffic_markdown(data, output_dir)
-    print(data)
+    
 
 if __name__ == "__main__":
     main()
