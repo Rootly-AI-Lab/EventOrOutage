@@ -12,7 +12,7 @@ Analyze website traffic and geo-location events.
 `src/event_or_outage/cli.py -d "February 14, 2025" -m "gpt-4o"`
 
 ### Provide a location and a date
-`src/event_or_outage/cli.py -d "October 2024" -l India`
+`src/event_or_outage/cli.py -d "October 2024" -l IN`
 
 ### Analyze logs from a csv file
 `src/event_or_outage/cli.py -f "traffic_events.csv"`

@@ -22,8 +22,8 @@ class SyntheticData:
         WEBSITES = [
             "runbook.com"
         ]
-        GEOS = ["US", "India"] 
-        # ["US", "India", "UK", "Canada", "Australia", "New Zealand", 
+        GEOS = ["US", "IN"] 
+        # ["US", "IN", "UK", "Canada", "Australia", "New Zealand", 
         # "Brazil", "Mexico", "Argentina", "Chile", "Colombia", "Peru", 
         # "Venezuela", "Ecuador", "Paraguay", "Uruguay", "Bolivia", 
         # "Costa Rica", "Dominican Republic", "El Salvador", "Guatemala", 
@@ -75,14 +75,14 @@ class SyntheticData:
                 verbosity_level=self.LLM_LOGLEVEL
             )
             prompt = f"""
-                generate a few dates between {mid_date} and {end_date} which are holidays or events.
+                generate a few dates between {mid_date} and {end_date} which you know are holidays or events as an llm.
                 Specify a % for which each holiday may affect traffic. Also specify which geos out of {website_data[website]['geos']} 
                 would be most affected by each holiday.
                 Filter events to only include those with probability > 50%
                 return as a list of dictionaries with the following keys: geo, date, event_name, probability
                 """
             events = agent.run(prompt)
-            self.logger.info(events)
+            # self.logger.info(events)
             
             for geo in website_data[website]['geos']:
                 base_pv = website_data[website]['base_pageviews']

@@ -2,7 +2,7 @@
 single_event:
   template: |
     My website traffic dropped {duration} {location}
-    Can you tell me 5 most likely holidays or events that might cause that with probabilities? 
+    provide 3 most likely holidays or events that might cause it with probabilities based on your knowledge as an llm
     Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
     Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
     Use your own logic to determine the probability of each holiday/event.
@@ -15,12 +15,12 @@ single_event:
   
 bulk_analysis:
   template: |
-    Analyze traffic anomalies on the following websites, locations and dates:
+    My website had traffic drops on the following dates, two letter country codes are included:
 
     {anomalies_list}
 
     For each:
-    - Identify potential causes for the traffic changes, including holidays and events
+    - provide 3 most likely holidays or events that might cause it with probabilities based on your knowledge as an llm
     - Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
     - Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
     - Use your own logic to determine the probability of each holiday/event.

@@ -35,7 +35,7 @@ class SingleAnomalyAgent:
         
         model = LLMUtils.get_llm_model(model)
         tools = []
-        tools.append(HolidaysAPITool())
+        # tools.append(HolidaysAPITool()) # enable if you have a premium account for holidayapi.com
         tools.append(CalendarificAPITool())
         agent = CodeAgent(
             tools=tools,

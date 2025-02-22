@@ -88,7 +88,7 @@ def main():
         #     "summary": "Test summary",
         #     "analysis": {
         #         "runbook.com": {
-        #             "India": {
+        #             "IN": {
         #                 "2024-10-29": [{'event': 'Holi', 'probability': 0.7}, {'event': 'Gandhi Jayanti', 'probability': 0.77}],
         #                 "2024-11-13": [{'event': 'Navaratri', 'probability': 0.97}, {'event': 'Pongal', 'probability': 0.85}],
         #                 "2024-11-16": [{'event': 'Holi', 'probability': 0.55}, {'event': "New Year's Day", 'probability': 0.73}, {'event': 'Eid', 'probability': 0.57}],
