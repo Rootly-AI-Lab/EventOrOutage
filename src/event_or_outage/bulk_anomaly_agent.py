@@ -9,8 +9,8 @@ from utils import Utils
 # TODO: Inherit from CodeAgent
 class BulkAnomalyAgent:
 
-    LLM_LOGLEVEL = LogLevel.OFF
-    LLM_MAX_STEPS_OVERRIDE = 100
+    LLM_LOGLEVEL = LogLevel.INFO
+    LLM_MAX_STEPS_OVERRIDE = 10
     BULK_LLM_BATCH_SIZE = 25
 
     def __init__(self):
@@ -28,7 +28,7 @@ class BulkAnomalyAgent:
         for website, geo_data in anomaly_candidates.items(): 
             for geo, dates in geo_data.items():
                 for date in dates:
-                    property_list.append(f"Website: {website}, Geo: {geo}, Date: {date}")
+                    property_list.append(f"Country: {geo}, Date: {date}")
 
         model = LLMUtils.get_llm_model(model)
         self.logger.info(f"Analyzing {len(property_list)} anomalies")
@@ -36,7 +36,7 @@ class BulkAnomalyAgent:
         batches = [property_list[i:i + self.BULK_LLM_BATCH_SIZE] for i in range(0, len(property_list), self.BULK_LLM_BATCH_SIZE)]
         
         tools = []
-        tools.append(HolidaysAPITool())
+        # tools.append(HolidaysAPITool()) # enable if you have a premium account for holidayapi.com
         tools.append(CalendarificAPITool())
 
         agent = CodeAgent(

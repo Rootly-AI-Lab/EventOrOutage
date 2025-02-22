@@ -20,28 +20,28 @@ bulk_analysis:
     {anomalies_list}
 
     For each:
-    - provide 3 most likely holidays or events that might cause it with probabilities based on your knowledge as an llm
-    - Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
-    - Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
-    - Use your own logic to determine the probability of each holiday/event.
-    - If you get a 402 error from holidayapi.com, then don't call it again. Store the error message and list it in the summary.
-    - You need to always pass in a country, year, month and day to the tools. The country param should be in two character country code format
-    - Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
-    - Determine probability of each potential cause and list 5 most likely causes (ie probability > 50%)
-    - if there are no events that have a probability greater than 0.5, then just drop the event
+    - Identify 3 potential causes for the drop including holidays or events based on your knowledge as an llm
+    - Optionally use holidays_api_tool and calendarific_api_tool from your tools to get holiday information for dates that have large drops but you don't think are holidays. They might be newer than your database or current events. 
+    - Avoid using tools as much as possible and deduplicate dates when calling tools.
+    - If you get a 402 error from a tool, don't call it again. List the error message in the summary if there is space.
+    - The tools require a country, year, month and day. The country param two character country code
+    - Both tools need a country, if a country is not provided in the list above, chose a few likely countries.
+    - Use your knowledge to determine the probability of each holiday causing a drop.
+    - list 3 most probable causes for each drop
+    - if no cause has probability greater than 0.5, then drop the event
 
-    Please provide a detailed analysis for each anomaly, as well as any overall trends or insights across multiple anomalies.
-    Now format this into a dictionary object with the following hierarchy:
+    I need two pieces of information
+    1. Probable causes for each drop with probabilies in the dictionary format provided below, and
+    2. An overall summary, which could include trends or insights across multiple anomalies
+    Below is the structure for the first piece of information:
     - {{"analysis": 
-        {{"website": 
-          {{"geo": 
-            {{"date": 
-              [{{"event": "description", "probability": numeric_value}}]
-              }}
+        {{"geo": 
+          {{"date": 
+            [{{"event": "description", "probability": numeric_value}}]
             }}
           }},
           {{"summary": "summary of analysis"}}
         }}
 
-      The summary should be a concise summary of the analysis and at most 8 sentences. Tailor it for executives. Specify the date, the reason you have deduce and how sure you are.
+      The summary should be concise and between 4 and 8 sentences. Tailor it for executives. Specify the date, the reason you propose and how sure you are.
   
