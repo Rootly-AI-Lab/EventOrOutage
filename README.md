@@ -6,20 +6,23 @@ Analyze website traffic and geo-location events.
 ## Example Usage from command line
 
 ### Analyze an incident today
-`src/event_or_outage/cli.py`
+`analyze`
 
 ### Override the model and provide a date in the past
-`src/event_or_outage/cli.py -d "February 14, 2025" -m "gpt-4o"`
+`analyze -d "February 14, 2025" -m "gpt-4o"`
 
 ### Provide a location and a date
-`src/event_or_outage/cli.py -d "October 2024" -l IN`
+`analyze -d "October 2024" -l IN`
 
 ### Analyze logs from a csv file
-`src/event_or_outage/cli.py -f "traffic_events.csv"`
+`analyze -f "artifacts/traffic_events.csv"`
+> ![Example Analysis](examples/output.png)
+> ![Example Analysis](examples/chart.png)
 
-### Generate synthetic data and accompanying charts
 
-`src/event_or_outage/synthetic_data_generator.py`
+
+> Generate synthetic data and accompanying charts for testing by using
+> `generate -d .`
 
 ## Possible Future Improvements
 - You can add more tools to fetch events from other sources such as everyeventapi, google calendar api for holidays etc
@@ -31,11 +34,7 @@ Analyze website traffic and geo-location events.
 ```
 python -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
-create a .env file with the following:
-OPENAI_API_KEY=[your-openai-key]
-
-
+.....
 
 
 
