@@ -86,16 +86,15 @@ def main():
         output_analysis = output['analysis']
         base_path = os.path.dirname(args.file)
         MarkdownGenerator.generate_anomaly_markdown(df, anomaly_candidates, output_analysis, base_path)
-        
         if output.get('summary'):
-            print(colored(output['summary'], 'green'))
+            print(colored('\n'.join(output['summary']), 'green'))
         else:
             logger.info(colored(output, 'yellow'))
         return
         
     # Access the arguments
     if args.verbose:
-        print(f"Verbose mode enabled")
+        print(f"Verbose mode enabled") # TODO: Not hooked up yet
     if args.duration == None:
         args.duration = "today"
     if args.location == None:

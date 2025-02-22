@@ -20,6 +20,7 @@ wheels/
 .installed.cfg
 *.egg
 artifacts/*
+.DS_Store
 
 # Virtual Environment
 venv/

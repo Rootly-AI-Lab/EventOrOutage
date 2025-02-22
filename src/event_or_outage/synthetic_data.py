@@ -17,7 +17,7 @@ class SyntheticData:
         if not OPENAI_API_KEY:
             raise ValueError("OPENAI_API_KEY is not set")
 
-    def generate(self, output_dir: str, end_date: datetime = datetime.today()):
+    def generate(self, end_date: datetime = datetime.today()):
 
         """
         Generate synthetica data till end date. 

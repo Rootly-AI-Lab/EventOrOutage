@@ -23,10 +23,10 @@ def main():
         raise ValueError("Output directory is required")
     
     output_dir = args.dir
-    data = SyntheticData().generate(datetime(2024, 11, 1))
+    data = SyntheticData().generate(datetime(2024, 11, 15))
     MarkdownGenerator.generate_traffic_csv(data, output_dir)
     MarkdownGenerator.generate_traffic_markdown(data, output_dir)
-    
+
 
 if __name__ == "__main__":
     main()

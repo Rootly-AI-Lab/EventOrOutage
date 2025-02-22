@@ -20,9 +20,8 @@ bulk_analysis:
     {anomalies_list}
 
     For each:
-    - Identify 3 potential causes for the drop on that date such as holidays or events based on your knowledge as an llm
-    - If you don't know about any common holidays on that date, you can use holidays_api_tool and calendarific_api_tool from your tools sparingly. 
-    - Avoid using tools as much as possible.
+    - First identify 3 holidays or events on that date using your llm knowledge
+    - If you don't know about any common holidays on that date, you can use holidays_api_tool and calendarific_api_tool from your tools sparingly but limit it to 3 calls across all dates. 
     - If you get a 402 error from a tool, don't call it again. List the error message in the summary if there is space.
     - The tools require a country, year, month and day. The country param is the two character country code
     - Choose a likely country if country is not provided.

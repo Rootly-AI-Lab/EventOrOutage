@@ -4,7 +4,7 @@ import os
 
 
 class CalendarificAPITool(Tool):
-
+    # TODO: Make this a batch call tool to improve llm performance
     name = "calendarific_api_tool"
     description = """
     This is a tool that fetches holidays from Calendarific for a specific date."""

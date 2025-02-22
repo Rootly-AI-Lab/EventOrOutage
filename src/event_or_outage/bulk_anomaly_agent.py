@@ -65,6 +65,7 @@ class BulkAnomalyAgent:
             spinner.start()
             try:
                 result = agent.run(prompt)
+                # result = {'analysis': {'US': {'2024-10-19': [{'event': 'Sweetest Day', 'probability': 0.2}], '2024-10-21': [{'event': 'Possible effects of Sweetest Day', 'probability': 0.2}], '2024-10-24': [{'event': 'Shmini Atzeret', 'probability': 0.3}], '2024-10-25': [{'event': 'Halloween preparations', 'probability': 0.6}], '2024-10-31': [{'event': 'Halloween', 'probability': 0.9}], '2024-11-01': [{'event': 'Post-Halloween', 'probability': 0.6}], '2024-11-07': [{'event': 'Unidentified event', 'probability': 0.1}], '2024-11-09': [{'event': 'Unidentified event', 'probability': 0.1}], '2024-11-10': [{'event': "Veteran's Day observed", 'probability': 0.7}], '2024-11-11': [{'event': "Veteran's Day", 'probability': 0.8}], '2024-11-12': [{'event': "Post-Veteran's Day", 'probability': 0.6}]}, 'IN': {'2024-11-02': [{'event': 'Govardhan Puja', 'probability': 0.7}]}}, 'summary': "The traffic drops on Oct 19, Oct 21 and Oct 24 in US are tentatively attributed to Sweetest Day and Shmini Atzeret with probabilities 20% and 30% respectively. The drop on Oct 25 and Nov 1 are likely related to Halloween with a probability of 60%. The traffic drop on Nov 10 and Nov 12 are probably due to Veteran's Day with a probability of 80%. For the date with traffic drop in India, Nov 2, we identified Govardhan Puja as a possible cause with a probability of 70%. Note that these are educated suggestions and further analysis may be required for precise conclusions."}
                 spinner.stop()
                 all_results.append(result)
             except Exception as e:
@@ -73,12 +74,15 @@ class BulkAnomalyAgent:
 
         # Combine results from all batches
         combined_result = {
-            'analysis': {}
+            'analysis': {},
+            'summary': []
         }
         for result in all_results:
             try:
                 if result.get('analysis'):
                     combined_result['analysis'].update(result['analysis'])
+                if result.get('summary'):
+                    combined_result['summary'].append(result['summary'])
             except Exception as e:
                 self.logger.error(f"Error updating combined result: {e}")
                 self.logger.error(f"result was: {result}")
