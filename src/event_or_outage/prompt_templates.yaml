@@ -20,23 +20,23 @@ bulk_analysis:
     {anomalies_list}
 
     For each:
-    - Identify 3 potential causes for the drop including holidays or events based on your knowledge as an llm
-    - Optionally use holidays_api_tool and calendarific_api_tool from your tools to get holiday information for dates that have large drops but you don't think are holidays. They might be newer than your database or current events. 
-    - Avoid using tools as much as possible and deduplicate dates when calling tools.
+    - Identify 3 potential causes for the drop on that date such as holidays or events based on your knowledge as an llm
+    - If you don't know about any common holidays on that date, you can use holidays_api_tool and calendarific_api_tool from your tools sparingly. 
+    - Avoid using tools as much as possible.
     - If you get a 402 error from a tool, don't call it again. List the error message in the summary if there is space.
-    - The tools require a country, year, month and day. The country param two character country code
-    - Both tools need a country, if a country is not provided in the list above, chose a few likely countries.
-    - Use your knowledge to determine the probability of each holiday causing a drop.
-    - list 3 most probable causes for each drop
-    - if no cause has probability greater than 0.5, then drop the event
+    - The tools require a country, year, month and day. The country param is the two character country code
+    - Choose a likely country if country is not provided.
+    - if a tool response has multiple events, only use the first
+    - Use your knowledge as an llm to determine the probability of each holiday causing a drop.
+    - Drop the date if no cause has probability > 50% and then list 3 most probable causes only
 
-    I need two pieces of information
+    Structure the output as follows:
     1. Probable causes for each drop with probabilies in the dictionary format provided below, and
     2. An overall summary, which could include trends or insights across multiple anomalies
     Below is the structure for the first piece of information:
-    - {{"analysis": 
-        {{"geo": 
-          {{"date": 
+    - {{analysis: 
+        {{country: 
+          {{date: 
             [{{"event": "description", "probability": numeric_value}}]
             }}
           }},

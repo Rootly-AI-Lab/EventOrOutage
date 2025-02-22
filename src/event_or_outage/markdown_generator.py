@@ -26,7 +26,7 @@ class MarkdownGenerator:
         
         # FIXME: Duplicate code between this and generate_traffic_markdown
         for geo in traffic_data['geo'].unique():
-            markdown_content += f"### {geo}\n\n"
+            markdown_content += f"### Country:{geo}\n\n"
             markdown_content += "## Daily View\n\n"
             geo_df = traffic_data[traffic_data['geo'] == geo]
             iter_date = pd.to_datetime(geo_df['date'])
@@ -53,7 +53,6 @@ class MarkdownGenerator:
     
             total_anomalies = 0
             triaged_anomalies = 0
-            
             # Get anomaly candidates for current website and geo
             geo_anomaly_candidates = anomaly_candidates.get(geo, {})
             if geo_anomaly_candidates:
@@ -76,7 +75,7 @@ class MarkdownGenerator:
                     markdown_content += "\n\n"
                 markdown_content += "</details>\n\n"
             else:
-                markdown_content += "No anomalies detected for this website/geo combination.\n\n"
+                markdown_content += "No anomalies detected for this country.\n\n"
                 total_anomalies = 0
             
             
@@ -105,9 +104,7 @@ class MarkdownGenerator:
 
     # FIXME: passing a date here is pretty ugly
     def generate_traffic_markdown(
-            websites: list, 
             traffic_data: pd.DataFrame, 
-            website_data: dict, 
             start_date: datetime, 
             end_date: datetime,
             output_dir: str):
@@ -127,30 +124,27 @@ class MarkdownGenerator:
         # Generate Mermaid charts markdown
         markdown_content = "# Website Traffic Analysis\n\n"
 
-        for website in websites:
-            markdown_content += f"## {website}\n\n"
-            website_df = df[df['website'] == website]
 
-            for geo in website_data[website]['geos']:
-                markdown_content += f"### {geo}\n\n"
-                markdown_content += "## Daily View\n\n"
-                geo_df = website_df[website_df['geo'] == geo]
-                month1_data = geo_df[geo_df['date'] < (end_date - timedelta(days=30))]
-                month2_data = geo_df[geo_df['date'] >= (end_date - timedelta(days=30))]
-                min_pv = min(geo_df['pageviews'])
-                max_pv = max(geo_df['pageviews'])
-                
+        for geo in traffic_data['geos']:
+            markdown_content += f"### Country: {geo}\n\n"
+            markdown_content += "## Daily View\n\n"
+            geo_df = traffic_data[traffic_data['geo'] == geo]
+            month1_data = geo_df[geo_df['date'] < (end_date - timedelta(days=30))]
+            month2_data = geo_df[geo_df['date'] >= (end_date - timedelta(days=30))]
+            min_pv = min(geo_df['pageviews'])
+            max_pv = max(geo_df['pageviews'])
+            
 
-                markdown_content += "```mermaid\n"
-                markdown_content += "xychart-beta\n"
-                markdown_content += "title Traffic Analysis\n"
-                markdown_content += f"x-axis [" + ",".join([f'"{d.strftime("%Y-%m-%d")}"' for d in month1_data['date']]) + "]\n"
-                markdown_content += f"y-axis \"Pageviews\" 0--> {max_pv}\n"
-                
-                # Add data lines
-                markdown_content += f"line [" + ",".join(map(str, month1_data['pageviews'].tolist())) + "]\n"
-                markdown_content += f"line [" + ",".join(map(str, month2_data['pageviews'].tolist())) + "]\n"
-                markdown_content += "```\n\n"
+            markdown_content += "```mermaid\n"
+            markdown_content += "xychart-beta\n"
+            markdown_content += "title Traffic Analysis\n"
+            markdown_content += f"x-axis [" + ",".join([f'"{d.strftime("%Y-%m-%d")}"' for d in month1_data['date']]) + "]\n"
+            markdown_content += f"y-axis \"Pageviews\" 0--> {max_pv}\n"
+            
+            # Add data lines
+            markdown_content += f"line [" + ",".join(map(str, month1_data['pageviews'].tolist())) + "]\n"
+            markdown_content += f"line [" + ",".join(map(str, month2_data['pageviews'].tolist())) + "]\n"
+            markdown_content += "```\n\n"
 
         if not os.path.exists(output_dir):
             raise FileNotFoundError(f"Base path {output_dir} does not exist")

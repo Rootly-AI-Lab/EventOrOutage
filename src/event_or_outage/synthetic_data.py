@@ -148,4 +148,4 @@ class SyntheticData:
 
         
         MarkdownGenerator.generate_traffic_csv(data, output_dir)
-        MarkdownGenerator.generate_traffic_markdown(WEBSITES, data, website_data, start_date, end_date, output_dir)
+        MarkdownGenerator.generate_traffic_markdown(data, start_date, end_date, output_dir)

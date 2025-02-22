@@ -83,20 +83,6 @@ def main():
         anomaly_candidates = NaiveAnomalyDetecter().get_anomalies(df)
         output = BulkAnomalyAgent().troubleshoot(anomaly_candidates, args.model)
 
-        # Comment Agent run call above and Uncomment the code below for quick testing
-        # output = {
-        #     "summary": "Test summary",
-        #     "analysis": {
-        #         "runbook.com": {
-        #             "IN": {
-        #                 "2024-10-29": [{'event': 'Holi', 'probability': 0.7}, {'event': 'Gandhi Jayanti', 'probability': 0.77}],
-        #                 "2024-11-13": [{'event': 'Navaratri', 'probability': 0.97}, {'event': 'Pongal', 'probability': 0.85}],
-        #                 "2024-11-16": [{'event': 'Holi', 'probability': 0.55}, {'event': "New Year's Day", 'probability': 0.73}, {'event': 'Eid', 'probability': 0.57}],
-        #                 "2024-11-24": [{'event': 'Navaratri', 'probability': 0.95}, {'event': "New Year's Day", 'probability': 0.88}]
-        #             }
-        #         }
-        #     }
-        # }
         output_analysis = output['analysis']
         base_path = os.path.dirname(args.file)
         MarkdownGenerator.generate_anomaly_markdown(df, anomaly_candidates, output_analysis, base_path)
