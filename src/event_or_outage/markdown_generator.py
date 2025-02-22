@@ -1,6 +1,6 @@
 import pandas as pd
 from datetime import datetime, timedelta
-from file_utils import FileUtils
+from .file_utils import FileUtils
 import os
 
 class MarkdownGenerator:
@@ -105,8 +105,6 @@ class MarkdownGenerator:
     # FIXME: passing a date here is pretty ugly
     def generate_traffic_markdown(
             traffic_data: pd.DataFrame, 
-            start_date: datetime, 
-            end_date: datetime,
             output_dir: str):
         """Generate charts of the analysis results.
         
@@ -124,6 +122,8 @@ class MarkdownGenerator:
         # Generate Mermaid charts markdown
         markdown_content = "# Website Traffic Analysis\n\n"
 
+        end_date = traffic_data['date'].max()
+        start_date = end_date - timedelta(days=60)
 
         for geo in traffic_data['geos']:
             markdown_content += f"### Country: {geo}\n\n"

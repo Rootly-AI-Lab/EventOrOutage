@@ -1,14 +1,14 @@
 #! /usr/bin/env python3
-from single_anomaly_agent import SingleAnomalyAgent
-from bulk_anomaly_agent import BulkAnomalyAgent
-from naive_anomaly_detecter import NaiveAnomalyDetecter
+from .single_anomaly_agent import SingleAnomalyAgent
+from .bulk_anomaly_agent import BulkAnomalyAgent
+from .naive_anomaly_detecter import NaiveAnomalyDetecter
 import argparse
 import os
 import pandas as pd
 from termcolor import colored
 from logging import Logger
 from datetime import datetime
-from markdown_generator import MarkdownGenerator
+from .markdown_generator import MarkdownGenerator
 
 class CLI:
     

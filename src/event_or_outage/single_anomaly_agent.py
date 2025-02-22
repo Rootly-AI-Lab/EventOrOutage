@@ -1,10 +1,10 @@
 from smolagents import CodeAgent, LiteLLMModel, tool, LogLevel
 from dotenv import load_dotenv
-from utils import Utils
+from .utils import Utils
 import os
-from llm_utils import LLMUtils
-from tools.holidays_api_tool import HolidaysAPITool
-from tools.calendarific_api_tool import CalendarificAPITool
+from .llm_utils import LLMUtils
+from .tools.holidays_api_tool import HolidaysAPITool
+from .tools.calendarific_api_tool import CalendarificAPITool
 from halo import Halo
 from logging import Logger
 

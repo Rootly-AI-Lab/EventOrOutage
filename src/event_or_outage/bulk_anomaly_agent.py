@@ -1,10 +1,10 @@
 from smolagents import CodeAgent, LiteLLMModel, tool, LogLevel
-from llm_utils import LLMUtils
-from tools.holidays_api_tool import HolidaysAPITool
-from tools.calendarific_api_tool import CalendarificAPITool
+from .llm_utils import LLMUtils
+from .tools.holidays_api_tool import HolidaysAPITool
+from .tools.calendarific_api_tool import CalendarificAPITool
 from halo import Halo
 from logging import Logger
-from utils import Utils
+from .utils import Utils
 
 # TODO: Inherit from CodeAgent
 class BulkAnomalyAgent:
@@ -25,10 +25,10 @@ class BulkAnomalyAgent:
             anomaly_candidates: Dictionary containing websites, their geos, and anomalous dates
         """
         property_list = []
-        for website, geo_data in anomaly_candidates.items(): 
-            for geo, dates in geo_data.items():
-                for date in dates:
-                    property_list.append(f"Country: {geo}, Date: {date}")
+
+        for geo, dates in anomaly_candidates.items():
+            for date in dates:
+                property_list.append(f"Country: {geo}, Date: {date}")
 
         model = LLMUtils.get_llm_model(model)
         self.logger.info(f"Analyzing {len(property_list)} anomalies")

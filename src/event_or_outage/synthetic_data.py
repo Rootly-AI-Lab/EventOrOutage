@@ -5,8 +5,8 @@ import random
 from smolagents import CodeAgent, LiteLLMModel
 from logging import Logger
 import os
-from markdown_generator import MarkdownGenerator
-from utils import Utils
+from .markdown_generator import MarkdownGenerator
+from .utils import Utils
 from smolagents import LogLevel
 class SyntheticData:
     LLM_LOGLEVEL = LogLevel.INFO
@@ -17,7 +17,16 @@ class SyntheticData:
         if not OPENAI_API_KEY:
             raise ValueError("OPENAI_API_KEY is not set")
 
-    def generate(self, output_dir: str):
+    def generate(self, output_dir: str, end_date: datetime = datetime.today()):
+
+        """
+        Generate synthetica data till end date. 
+        Currently generates data for 1 website, 2 geos and for 60 days.
+
+        Args:
+            output_dir: The directory to save the generated data
+            end_date: The end date of the data to generate
+        """
         # Constants
         WEBSITES = [
             "runbook.com"
@@ -44,15 +53,14 @@ class SyntheticData:
             for geo in website_data[website]['geos']:
                 website_data[website]['growth_rates'][geo] = random.uniform(0.02, 0.20)
 
-        # Set end date to November 1, 2024
-        end_date = datetime(2024, 11, 1)
+        
 
         # Pick a random month in the past 12 months
         # end_date = datetime.now() - timedelta(days=random.randint(0, 365))
 
         end_date = end_date.replace(day=random.randint(1, 28))  # Avoid invalid dates
         mid_date = end_date - timedelta(days=29)
-        start_date = end_date - timedelta(days=60)  # Changed from 730 to 60 days
+        start_date = end_date - timedelta(days=60)
         dates = pd.date_range(start=start_date, end=end_date, freq='D')
 
 
@@ -147,5 +155,4 @@ class SyntheticData:
                     ])
 
         
-        MarkdownGenerator.generate_traffic_csv(data, output_dir)
-        MarkdownGenerator.generate_traffic_markdown(data, start_date, end_date, output_dir)
+        return data
