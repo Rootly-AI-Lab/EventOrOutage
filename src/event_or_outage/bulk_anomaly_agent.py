@@ -9,7 +9,7 @@ from .utils import Utils
 # TODO: Inherit from CodeAgent
 class BulkAnomalyAgent:
 
-    LLM_LOGLEVEL = LogLevel.INFO
+    LLM_LOGLEVEL = LogLevel.OFF
     LLM_MAX_STEPS_OVERRIDE = 10
     BULK_LLM_BATCH_SIZE = 25
 
