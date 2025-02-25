@@ -30,11 +30,11 @@ Analyze website traffic and geo-location events.
 
 ## Development
 
-### Install dependencies
+### Getting Started
 ```
 python -m venv .venv
 source .venv/bin/activate
-pip install -e .
+python -m pip install -e .
 
 generate -d .
 analyze -f artifacts/website_metrics_labelled.csv
