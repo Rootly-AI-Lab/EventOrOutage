@@ -1,43 +1,86 @@
-# EventOrOutage
-EventOrOutage
+_metrics_labelled.csv
+```
+**Requires:**
+* Python > 3.10
+* OpenAPI/Gemini/Anthropic API Key
 
-Analyze website traffic and geo-location events.
+## Examples 💎
+Here are a few ways you can use EventOrOutage:
+* `analyze` – will look for events happening today
+* `analyze -d "February 14, 2025" -m "gpt-4o"` – look for events at a specific date, using a specific model
+* `analyze -l IN` – look for events in a specific location, here India
+* `analyze -f "artifacts/traffic_events.csv"` – analyze traffic logs from a file
+* ` generate -d .` – generates synthetic traffic logs
 
-## Example Usage from command line
+## Stack 🛠️
+-   **LLMs:** GPT-4, Claude, Gemini and self-hosted (Deepseek).
+-   **Agent:** HuggingFace smolagents
+-   **Data Sources:** External APIs for holidays, news, and event tracking
 
-### Analyze an incident today
-`analyze`
+## Backstory 📖
+Back when [Jeba](https://www.linkedin.com/in/graydot/) and [Sylvain](https://www.linkedin.com/in/sylvainkalache/) were working at LinkedIn, they faced a situation where a large chunk of the site traffic was gone. Leadership panicked, engineering could not find the cause.
 
-### Override the model and provide a date in the past
-`analyze -d "February 14, 2025" -m "gpt-4o"`
+Turns out a major holiday was happening in India and people were busy celebrating, instead of browsing LinkedIn. Knowing about every potential major event in every country your product is used for isn’t possible, but LLMs are great at this type of task.
 
-### Provide a location and a date
-`analyze -d "October 2024" -l IN`
+## Future Improvements 🍀
+- Add support for additional data sources such as everyeventapi, Google Calendar API for holidays etc
+- Integration in data from logging tools such as Loggly, Splunk to analyze traffic anomalies
 
-### Analyze logs from a csv file
-`analyze -f "artifacts/traffic_events.csv"`
-> ![Example Analysis](examples/output.png)
-> ![Example Analysis](examples/chart.png)
+## About the Rootly AI Lab 🤖
+This project was developred by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community.
 
+# EventOrOutage 🥳☄️
+EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. 
 
+This standalone prototype shows how such feature could be would be usefull as part of an AI SRE or an embeded in a monitoring tool.
 
-> Generate synthetic data and accompanying charts for testing by using
-> `generate -d .`
+```
+$ eventoroutage -d "february 9th, 2025"
 
-## Possible Future Improvements
-- You can add more tools to fetch events from other sources such as everyeventapi, google calendar api for holidays etc
-- Data from logging tools such as loggly, splunk etc can be used to analyze anomalies
+Super Bowl LVIII – 85%:
 
-## Development
+-   Number of people involved: Over 100 million
+-   Countries involved: United States
 
-### Getting Started
+Lunar New Year Celebrations – 80%:
+
+-   Number of people involved: Approximately 1.5 billion
+-   Countries involved: China, Singapore, Malaysia, Indonesia, Philippines
+```
+
+## Get started 🚀
 ```
 python -m venv .venv
 source .venv/bin/activate
-python -m pip install -e .
-
-generate -d .
+pip install .
 analyze -f artifacts/website_metrics_labelled.csv
+```
+**Requires:**
+* Python > 3.10
+* OpenAPI/Gemini/Anthropic API Key
 
+## Examples 📖
+Here are a few ways you can use EventOrOutage:
+* `analyze` – will look for events happening today
+* `analyze -d "February 14, 2025" -m "gpt-4o"` – look for events at a specific date, using a specific model
+* `analyze -l IN` – look for events in a specific location, here India
+* `analyze -f "artifacts/traffic_events.csv"` – analyze traffic logs from a file
+* ` generate -d .` – generates synthetic traffic logs
 
+## Stack 🛠️
+-   **LLMs:** GPT-4, Claude, Gemini and self-hosted (Deepseek). 
+-   **Agent:** HuggingFace smolagents
+-   **Data Sources:** External APIs for holidays, news, and event tracking
+ 
+## Backstory 
+Back when [Jeba](https://www.linkedin.com/in/graydot/) and [Sylvain](https://www.linkedin.com/in/sylvainkalache/) were working at LinkedIn, they faced a situation where a large chunk of the site traffic was gone. Leadership panicked, engineering could not find the cause. 
 
+Turns out a major holiday was happening in India and people were busy celebrating, instead of browsing LinkedIn. Knowing about every potential major event in every country your product is used for isn’t possible, but LLMs are great at this type of task.
+
+## Future Improvements 
+- Add support for additional data sources such as everyeventapi, Google Calendar API for holidays etc
+- Integration in data from logging tools such as Loggly, Splunk to analyze traffic anomalies
+
+## About the Rootly AI Lab
+This project was developred by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community. 
+![Rootly AI logo](Rootly_AI_Logo_White.png)
