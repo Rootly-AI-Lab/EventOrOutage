@@ -4,6 +4,10 @@ single_event:
     My website traffic {industry_string} dropped on {duration} in the countries: {location} 
     First find the top 3 celebrations that happened on that date using your llm knowledge
     Use your knowledge as an llm to determine the probability of how likely each celebration is to disturb a website's traffic 
+    If you don't know about any common celebrations on that date, you can use holidays_api_tool and calendarific_api_tool sparingly and limit it to 3 calls across all dates. 
+    If you get an error from any tools, ignore it
+    You need to always pass in a country, year, month and day to the tools. The country param should be in two character country code format
+    Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
     Only list a reason if you have a probability greater than 0.5
     If you don't, just say "No events or holidays found"
     The output should use the following structure in plaintext for upto top 3 causes(do not add anything other content):
