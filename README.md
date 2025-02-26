@@ -1,33 +1,3 @@
-_metrics_labelled.csv
-```
-**Requires:**
-* Python > 3.10
-* OpenAPI/Gemini/Anthropic API Key
-
-## Examples 💎
-Here are a few ways you can use EventOrOutage:
-* `analyze` – will look for events happening today
-* `analyze -d "February 14, 2025" -m "gpt-4o"` – look for events at a specific date, using a specific model
-* `analyze -l IN` – look for events in a specific location, here India
-* `analyze -f "artifacts/traffic_events.csv"` – analyze traffic logs from a file
-* ` generate -d .` – generates synthetic traffic logs
-
-## Stack 🛠️
--   **LLMs:** GPT-4, Claude, Gemini and self-hosted (Deepseek).
--   **Agent:** HuggingFace smolagents
--   **Data Sources:** External APIs for holidays, news, and event tracking
-
-## Backstory 📖
-Back when [Jeba](https://www.linkedin.com/in/graydot/) and [Sylvain](https://www.linkedin.com/in/sylvainkalache/) were working at LinkedIn, they faced a situation where a large chunk of the site traffic was gone. Leadership panicked, engineering could not find the cause.
-
-Turns out a major holiday was happening in India and people were busy celebrating, instead of browsing LinkedIn. Knowing about every potential major event in every country your product is used for isn’t possible, but LLMs are great at this type of task.
-
-## Future Improvements 🍀
-- Add support for additional data sources such as everyeventapi, Google Calendar API for holidays etc
-- Integration in data from logging tools such as Loggly, Splunk to analyze traffic anomalies
-
-## About the Rootly AI Lab 🤖
-This project was developred by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community.
 
 # EventOrOutage 🥳☄️
 EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. 
@@ -84,3 +54,4 @@ Turns out a major holiday was happening in India and people were busy celebratin
 ## About the Rootly AI Lab
 This project was developred by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community. 
 ![Rootly AI logo](Rootly_AI_Logo_White.png)
+
