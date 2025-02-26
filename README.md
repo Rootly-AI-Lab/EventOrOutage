@@ -1,6 +1,6 @@
 
 # EventOrOutage 🥳☄️
-EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. 
+EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. For each event, it shows the probably that the event could have an impact on traffic, which geographies are impacted and how many people may be involved.
 
 This standalone prototype shows how such feature could be would be usefull as part of an AI SRE or an embeded in a monitoring tool.
 
