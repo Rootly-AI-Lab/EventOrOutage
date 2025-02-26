@@ -1,18 +1,19 @@
 # Default templates for different analysis scenarios
 single_event:
   template: |
-    My website traffic dropped {duration} {location}
-    provide 3 most likely holidays or events that might cause it with probabilities based on your knowledge as an llm
-    Optionally use holidays_api_tool and calendarific_api_tool from your tools to get event/ holiday information for dates that are newer than your database. 
-    Avoid using the tools for dates you already know about. Deduplicate calls to these tools.
-    Use your own logic to determine the probability of each holiday/event.
-    If you get a 402 error from holidayapi.com, then don't call it again. Store the error message and list it in the summary.
-    You need to always pass in a country, year, month and day to the tools. The country param should be in two character country code format
-    Since both tools need a country, if a country is not provided, use a few countries that are most likely to be the cause.
+    My website traffic {industry_string} dropped on {duration} in the countries: {location} 
+    First find the top 3 celebrations that happened on that date using your llm knowledge
+    Use your knowledge as an llm to determine the probability of how likely each celebration is to disturb a website's traffic 
     Only list a reason if you have a probability greater than 0.5
     If you don't, just say "No events or holidays found"
-    Output the result in a human readable format tailored for executives. Specify the date, the reason you have deduce and how sure you are.
-  
+    The output should use the following structure in plaintext for upto top 3 causes(do not add anything other content):
+    ====Output format=====
+    Your traffic drop on [date] was most likely caused by 
+    Display event name  
+      – impact probability %:
+      - Number of people involved: show number in K or M
+      - Countries affected: show country codes
+    ====End of output format=====
 bulk_analysis:
   template: |
     My website had traffic drops on the following dates, two letter country codes are included:
@@ -20,13 +21,13 @@ bulk_analysis:
     {anomalies_list}
 
     For each:
-    - First identify 3 holidays or events on that date using your llm knowledge
-    - If you don't know about any common holidays on that date, you can use holidays_api_tool and calendarific_api_tool from your tools sparingly but limit it to 3 calls across all dates. 
-    - If you get a 402 error from a tool, don't call it again. List the error message in the summary if there is space.
+    - First find the top 3 celebrations that happened on that date using your llm knowledge
+    - If you don't know about any common celebrations on that date, you can use holidays_api_tool and calendarific_api_tool sparingly and limit it to 3 calls across all dates. 
+    - If you get a 402 error from a tool or that the tool is not configured, don't call it again. 
     - The tools require a country, year, month and day. The country param is the two character country code
     - Choose a likely country if country is not provided.
     - if a tool response has multiple events, only use the first
-    - Use your knowledge as an llm to determine the probability of each holiday causing a drop.
+    - Use your knowledge as an llm to determine the probability of how likely each celebration is to disturb a website's traffic 
     - Drop the date if no cause has probability > 50% and then list 3 most probable causes only
 
     Structure the output as follows:
@@ -42,5 +43,9 @@ bulk_analysis:
           {{"summary": "summary of analysis"}}
         }}
 
-      The summary should be concise and between 4 and 8 sentences. Tailor it for executives. Specify the date, the reason you propose and how sure you are.
-  
+      The summary should be the following for the top 3 celebrations for each detected celebration(do not add anything other content):
+      - Display event name  
+        – impact probability %:
+        - Number of people involved: show number in K or M
+        - Countries affected: show country codes
+      

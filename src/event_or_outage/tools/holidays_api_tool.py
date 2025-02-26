@@ -1,7 +1,8 @@
 from smolagents import Tool
 import requests
 import os
-
+from termcolor import colored
+from logging import Logger
 
 class HolidaysAPITool(Tool):
 
@@ -29,13 +30,25 @@ class HolidaysAPITool(Tool):
     output_type = "object"
     
     def forward(self, country: str, year: int, month: int, day: int):
+        self.logger = Logger('default')
         """    
         Raises:
             Exception: If API call fails or returns an error
         """
+        if self.disabled:
+            return {
+                "error": "Tool is not configured. Do not call this tool."
+            }
         api_key = os.getenv("HOLIDAY_API_KEY")
         if not api_key:
-            raise ValueError("HOLIDAY_API_KEY environment variable is not set")
+            self.logger.error(
+                "HOLIDAY_API_KEY environment variable is not set"
+                "Disabling tool"
+            )
+            self.disabled = True
+            return {
+                "error": "Tool is not configured. Do not call this tool."
+            }
             
         base_url = "https://holidayapi.com/v1/holidays"
         params = {

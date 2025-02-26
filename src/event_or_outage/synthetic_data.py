@@ -13,10 +13,7 @@ class SyntheticData:
     def __init__(self):
         self.logger = Logger('default')
         Utils.load_dotenv()
-        OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
-        if not OPENAI_API_KEY:
-            raise ValueError("OPENAI_API_KEY is not set")
-
+        
     def generate(self, end_date: datetime = datetime.today()):
 
         """

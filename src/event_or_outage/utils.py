@@ -12,11 +12,16 @@ class Utils:
         load_dotenv(env_path)
         # FIXME: how to load env variables for includes.
         # Set default environment variables
-        os.environ.setdefault("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
-        os.environ.setdefault("ANTHROPIC_API_KEY", os.getenv("ANTHROPIC_API_KEY"))
-        os.environ.setdefault("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
-        os.environ.setdefault("HOLIDAY_API_KEY", os.getenv("HOLIDAY_API_KEY"))
-        os.environ.setdefault("CALENDARIFIC_API_KEY", os.getenv("CALENDARIFIC_API_KEY"))
+        if os.getenv("OPENAI_API_KEY"):
+            os.environ.setdefault("OPENAI_API_KEY", os.getenv("OPENAI_API_KEY"))
+        if os.getenv("ANTHROPIC_API_KEY"):
+            os.environ.setdefault("ANTHROPIC_API_KEY", os.getenv("ANTHROPIC_API_KEY"))
+        if os.getenv("GEMINI_API_KEY"):
+            os.environ.setdefault("GEMINI_API_KEY", os.getenv("GEMINI_API_KEY"))
+        if os.getenv("HOLIDAY_API_KEY"):
+            os.environ.setdefault("HOLIDAY_API_KEY", os.getenv("HOLIDAY_API_KEY"))
+        if os.getenv("CALENDARIFIC_API_KEY"):
+            os.environ.setdefault("CALENDARIFIC_API_KEY", os.getenv("CALENDARIFIC_API_KEY"))
 
     @staticmethod
     def load_templates():

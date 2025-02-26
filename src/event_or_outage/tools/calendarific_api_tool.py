@@ -33,9 +33,20 @@ class CalendarificAPITool(Tool):
         Raises:
             Exception: If API call fails or returns an error
         """
+        self.logger = Logger('default')
+        if self.disabled:
+            return {
+                "error": "Tool is not configured. Do not call this tool."
+            }
         api_key = os.getenv("CALENDARIFIC_API_KEY")
         if not api_key:
-            raise ValueError("CALENDARIFIC_API_KEY environment variable is not set")
+            self.logger.error(
+                "CALENDARIFIC_API_KEY environment variable is not set"
+            )
+            self.disabled = True
+            return {
+                "error": "Tool is not configured. Do not call this tool."
+            }
             
         base_url = "https://calendarific.com/api/v2/holidays"
         params = {

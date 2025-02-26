@@ -22,7 +22,7 @@ class CLI:
         parser.add_argument('-i', '--industry', type=str, help='Industry of the website. Optional. Helps triangulate more accurately.')
         parser.add_argument('-v', '--verbose', action='store_true', help='Increase output verbosity')
         parser.add_argument('-f', '--file', type=str, help='File to analyze bulk events. Optional. If not provided, the script will use other command line arguments.')
-        parser.add_argument('-m', '--model', type=str, choices=['gpt-4', 'claude-3-5-sonnet-latest', "gemini-pro"], default='gpt-4', help='Model to use for analysis. Supported models are gpt and claude.')
+        parser.add_argument('-m', '--model', type=str, default='gpt-4', help='Model to use for analysis. Supported models are gpt and claude.')
         # Parse arguments
         args = parser.parse_args()
         return args
@@ -100,7 +100,7 @@ def main():
     if args.location == None:
         args.location = ""
     output = SingleAnomalyAgent().troubleshoot(args.duration, args.location, args.industry, args.model)
-    print(colored(output, 'green'))
+    print(output)
 
 if __name__ == "__main__":
     main()

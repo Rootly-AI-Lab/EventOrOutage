@@ -26,8 +26,8 @@ dependencies = [
 ]
 
 [project.scripts]
-analyze = "event_or_outage.cli:main"
-generate = "event_or_outage.synthetic_data_generator:main"
+eventoroutage = "event_or_outage.cli:main"
+generatedata = "event_or_outage.synthetic_data_generator:main"
 
 [project.urls]
 "Homepage" = "https://github.com/username/your-package-name"

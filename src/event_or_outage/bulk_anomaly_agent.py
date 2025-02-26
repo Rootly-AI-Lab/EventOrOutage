@@ -5,6 +5,7 @@ from .tools.calendarific_api_tool import CalendarificAPITool
 from halo import Halo
 from logging import Logger
 from .utils import Utils
+import os
 
 # TODO: Inherit from CodeAgent
 class BulkAnomalyAgent:
@@ -36,8 +37,10 @@ class BulkAnomalyAgent:
         batches = [property_list[i:i + self.BULK_LLM_BATCH_SIZE] for i in range(0, len(property_list), self.BULK_LLM_BATCH_SIZE)]
         
         tools = []
-        # tools.append(HolidaysAPITool()) # enable if you have a premium account for holidayapi.com
-        tools.append(CalendarificAPITool())
+        if os.getenv('HOLIDAY_API_KEY'):
+            tools.append(HolidaysAPITool())
+        if os.getenv('CALENDARIFIC_API_KEY'):
+            tools.append(CalendarificAPITool())
 
         agent = CodeAgent(
             tools=tools,
@@ -47,7 +50,8 @@ class BulkAnomalyAgent:
                 "requests"
             ],
             verbosity_level = self.LLM_LOGLEVEL,
-            max_steps=self.LLM_MAX_STEPS_OVERRIDE
+            max_steps=self.LLM_MAX_STEPS_OVERRIDE,
+            planning_interval=3
         )
 
         # Process each batch

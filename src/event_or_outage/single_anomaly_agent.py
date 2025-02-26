@@ -9,6 +9,7 @@ from halo import Halo
 from logging import Logger
 
 
+
 # TODO: Inherit from CodeAgent
 class SingleAnomalyAgent:
     """
@@ -35,8 +36,10 @@ class SingleAnomalyAgent:
         
         model = LLMUtils.get_llm_model(model)
         tools = []
-        # tools.append(HolidaysAPITool()) # enable if you have a premium account for holidayapi.com
-        tools.append(CalendarificAPITool())
+        if os.getenv('HOLIDAY_API_KEY'):
+            tools.append(HolidaysAPITool())
+        if os.getenv('CALENDARIFIC_API_KEY'):
+            tools.append(CalendarificAPITool())
         agent = CodeAgent(
             tools=tools,
             model=model,
@@ -47,7 +50,7 @@ class SingleAnomalyAgent:
             verbosity_level=self.LLM_LOGLEVEL
         )
         if (single_event_template := Utils.load_templates()['single_event_template']):
-            prompt = single_event_template.format(industry=industry, duration = duration, location = location)
+            prompt = single_event_template.format(industry_string= " in industry " + industry if industry else "", duration = duration, location = location)
         else:
             raise ValueError("Single event template not found")
         spinner = Halo(text='Analyzing anomaly...', spinner='dots')
