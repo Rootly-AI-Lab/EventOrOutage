@@ -2,7 +2,7 @@
 # EventOrOutage 🥳☄️
 EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. For each event, it shows the probably that the event could have an impact on traffic, which geographies are impacted and how many people may be involved.
 
-This standalone prototype shows how such feature could be would be usefull as part of an AI SRE or an embeded in a monitoring tool.
+This standalone prototype shows how such feature could be  useful as part of an AI SRE or an embeded in a monitoring tool.
 
 ```
 $ eventoroutage -d "february 9th, 2025"
@@ -52,6 +52,6 @@ Turns out a major holiday was happening in India and people were busy celebratin
 - Integration in data from logging tools such as Loggly, Splunk to analyze traffic anomalies
 
 ## About the Rootly AI Lab
-This project was developred by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community. 
+This project was developed by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community. 
 ![Rootly AI logo](Rootly_AI_Logo_White.png)
 
