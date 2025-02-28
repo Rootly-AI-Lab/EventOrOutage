@@ -47,6 +47,7 @@ Here are a few ways you can use EventOrOutage:
 * `eventoroutage` – will look for events happening today
 * `eventoroutage -d "February 14, 2025" -m "gpt-4o"` – look for events at a specific date, using a specific model
 * `eventoroutage -l IN` – look for events in a specific location, here India
+* * `eventoroutage -i "Social Media"` – look for events that could impact a specific industry, here social media websites
 * `eventoroutage -f "artifacts/traffic_events.csv"` – analyze traffic logs from a file
 * ` generatedata -d .` – generates synthetic traffic logs
 
