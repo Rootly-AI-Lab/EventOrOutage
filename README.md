@@ -25,15 +25,20 @@ Lunar New Year Celebrations – 80%:
 ```
 
 ## Get started 🚀
+**Requirements:**
+* Python > 3.10
+* A `.env` file with OpenAPI/Gemini/Anthropic API Key (at least one)
+
+**Optional:**
+* A `HOLIDAY_API_KEY` in the `.env` file [Holiday API](https://holidayapi.com/)
+* A `CALENDARIFIC_API_KEY` in the `.even` file [Calendrific](https://calendarific.com/)
+
 ```
 python -m venv .venv
 source .venv/bin/activate
 pip install .
 analyze -f artifacts/website_metrics_labelled.csv
 ```
-**Requires:**
-* Python > 3.10
-* OpenAPI/Gemini/Anthropic API Key
 
 ## Examples 📖
 Here are a few ways you can use EventOrOutage:
