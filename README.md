@@ -1,5 +1,5 @@
 
-# EventOrOutage 🥳☄️
+# EventOrOutage 🌎
 ![OpenAI logo](https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white)
 ![Gemini logo](https://img.shields.io/badge/Gemini_Compatible-Compatible?style=flat-square&logo=googlegemini&labelColor=black&color=%238E75B2)
 ![Anthropic logo](https://img.shields.io/badge/Anthropic_Compatible-Compatible?style=flat-square&logo=anthropic&labelColor=black&color=white)
@@ -10,7 +10,7 @@
 
 EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. For each event, it shows the probably that the event could have an impact on traffic, which geographies are impacted and how many people may be involved.
 
-This standalone prototype shows how such feature could be  useful as part of an AI SRE or an embeded in a monitoring tool.
+This standalone prototype shows how such a feature could be useful as part of an AI SRE or embedded in a monitoring tool.
 
 ```
 $ eventoroutage -d "february 9th, 2025"
@@ -68,5 +68,5 @@ Turns out a major holiday was happening in India and people were busy celebratin
 
 ## About the Rootly AI Lab
 This project was developed by the Rootly AI Lab. The AI Lab is a fellow-led program designed to redefine reliability and system operations. We develop innovative prototypes, create open-source tools, and produce research reports we share with the community. 
-![Rootly AI logo](Rootly_AI_Logo_White.png)
+![Rootly AI logo](rootly-ai.png)
 
