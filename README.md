@@ -1,4 +1,5 @@
-<h1 style="text-align: center;">EventOrOutage 🌎</h1> 
+<h1 align="center">EventOrOutage 🌎</h1>
+
 ![OpenAI logo](https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white)
 ![Gemini logo](https://img.shields.io/badge/Gemini_Compatible-Compatible?style=flat-square&logo=googlegemini&labelColor=black&color=%238E75B2)
 ![Anthropic logo](https://img.shields.io/badge/Anthropic_Compatible-Compatible?style=flat-square&logo=anthropic&labelColor=black&color=white)
