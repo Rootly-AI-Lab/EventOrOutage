@@ -2,6 +2,7 @@
 # EventOrOutage 🥳☄️
 ![https://img.shields.io/badge/library-smolagents-purple?style=flat-square&logoColor=%23b600d](https://img.shields.io/badge/library-smolagents-purple?style=flat-square&logoColor=#b600d)
 ![https://img.shields.io/badge/Made%20by%20-%20Rootly%20AI%20Lab-blue?style=flat-square](https://img.shields.io/badge/Made%20by%20-%20Rootly%20AI%20Lab-blue?style=flat-square)
+![https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white](https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white)
 <a href="https://www.youtube.com/@rootlyhq/">
     <img src="https://img.shields.io/badge/youtube-d95652.svg?style=flat-square&logo=youtube" alt="youtube" style="height: 20px;">
   </a>
