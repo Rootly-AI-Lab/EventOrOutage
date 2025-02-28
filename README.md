@@ -26,8 +26,7 @@ Lunar New Year Celebrations – 80%:
 -   Countries involved: China, Singapore, Malaysia, Indonesia, Philippines
 ```
 
-## Get started 🚀
-**Requirements:**
+## Requirements 📋
 * Python > 3.10
 * A `.env` file with OpenAPI/Gemini/Anthropic API Key (at least one)
 
@@ -35,11 +34,13 @@ Lunar New Year Celebrations – 80%:
 * A `HOLIDAY_API_KEY` in the `.env` file [Holiday API](https://holidayapi.com/)
 * A `CALENDARIFIC_API_KEY` in the `.even` file [Calendrific](https://calendarific.com/)
 
+## Get started 🚀
+Run the following in a terminal
 ```
 python -m venv .venv
 source .venv/bin/activate
 pip install .
-analyze -f artifacts/website_metrics_labelled.csv
+eventoroutage
 ```
 
 ## Examples 📖
