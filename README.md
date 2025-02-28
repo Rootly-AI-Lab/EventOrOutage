@@ -1,12 +1,13 @@
 <h1 align="center">EventOrOutage 🌎</h1>
 <div align="center">
-![OpenAI logo](https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white)
-![Gemini logo](https://img.shields.io/badge/Gemini_Compatible-Compatible?style=flat-square&logo=googlegemini&labelColor=black&color=%238E75B2)
-![Anthropic logo](https://img.shields.io/badge/Anthropic_Compatible-Compatible?style=flat-square&logo=anthropic&labelColor=black&color=white)
-![Huggingface logo](https://img.shields.io/badge/smolagents-Compatible?style=flat-square&logo=huggingface&logoColor=%23FF9D00&labelColor=%23FFD21E&color=white)
-![Made by Rootly AI Lab](https://img.shields.io/badge/Made%20by%20-%20Rootly%20AI%20Lab-blue?style=flat-square)
-![Youtube](https://img.shields.io/badge/Project_episode-video?style=flat-square&logo=youtube&logoColor=%23FF0000&color=white)
+  <img src="https://img.shields.io/badge/OpenAI_Compatible-Compatible?style=flat-square&logo=openai&labelColor=black&color=white" alt="OpenAI logo">
+  <img src="https://img.shields.io/badge/Gemini_Compatible-Compatible?style=flat-square&logo=googlegemini&labelColor=black&color=%238E75B2" alt="Gemini logo">
+  <img src="https://img.shields.io/badge/Anthropic_Compatible-Compatible?style=flat-square&logo=anthropic&labelColor=black&color=white" alt="Anthropic logo">
+  <img src="https://img.shields.io/badge/smolagents-Compatible?style=flat-square&logo=huggingface&logoColor=%23FF9D00&labelColor=%23FFD21E&color=white" alt="Huggingface logo">
+  <img src="https://img.shields.io/badge/Made%20by%20-%20Rootly%20AI%20Lab-blue?style=flat-square" alt="Made by Rootly AI Lab">
+  <img src="https://img.shields.io/badge/Project_episode-video?style=flat-square&logo=youtube&logoColor=%23FF0000&color=white" alt="YouTube">
 </div>
+
 
 
 EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. For each event, it shows the probably that the event could have an impact on traffic, which geographies are impacted and how many people may be involved.
