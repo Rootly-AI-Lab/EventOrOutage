@@ -1,5 +1,11 @@
 
 # EventOrOutage 🥳☄️
+https://img.shields.io/badge/library-smolagents-purple?style=flat-square&logoColor=%23b600da
+https://img.shields.io/badge/Made%20by%20-%20Rootly%20AI%20Lab-blue?style=flat-square
+<a href="https://www.youtube.com/@rootlyhq/">
+    <img src="https://img.shields.io/badge/youtube-d95652.svg?style=flat-square&logo=youtube" alt="youtube" style="height: 20px;">
+  </a>
+
 EventOrOutage is leveraging LLMs to help SREs understand if a drop in traffic is due to an external event (holiday, election, sport event...) instead of an outage. For each event, it shows the probably that the event could have an impact on traffic, which geographies are impacted and how many people may be involved.
 
 This standalone prototype shows how such feature could be  useful as part of an AI SRE or an embeded in a monitoring tool.
